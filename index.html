@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-8">
+    <title>CMS</title>
+    <link rel="stylesheet" href="app-content/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="app-content/css/app.css" />
+</head>
+<body>
+<header class="header">
+    <nav class="col-md-9 col-xs-9">
+        <ul>
+            <a href="index.html"><li>Home</li></a>
+            <a href="#!/login"><li>Login</li></a>
+            <a href="#!/articles"><li>Articles</li></a>
+        </ul>
+
+    </nav>
+    <div class="col-md-3 col-xs-3 loginButtons"  style="display:block">
+        <a href="register/register.view.html"><button>Sign in</button></a>
+        <a href="login/login.view.html"><button>Log in</button></a>
+    </div>
+    <div id="logoutButtons" class="col-md-3 col-xs-3" style="display:none">
+        <span id="displayUsername"></span>
+       <a href="#!/login" ng-click="vm.logout()"  class="btn btn-primary">Logout</a>
+    </div>
+</header>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+                <div ng-view></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- includes -->
+    <script src="app-content/js/jquery.min.js"></script>
+    <script src="app-content/js/angular.min.js"></script>
+    <script src="app-content/js/angular-route.min.js"></script>
+    <script src="app-content/js/angular-cookies.min.js"></script>
+
+    <!-- services -->
+    <script src="app.js"></script>
+    <script src="app-services/authentication.service.js"></script>
+    <script src="app-services/register.service.js"></script>
+    <script src="app-services/flash.service.js"></script>
+    <script src="app-services/articles.service.js"></script>
+    <script src="app-services/user.service.js"></script>
+
+
+    <!-- controllers -->
+    <script src="home/home.controller.js"></script>
+    <script src="login/login.controller.js"></script>
+    <script src="register/register.controller.js"></script>
+    <script src="articles/articles.controller.js"></script>
+    <script src="singleArticle/singleArticle.controller.js"></script>
+    <script src="insertArticle/insertArticle.controller.js"></script>
+
+</body>
+</html>

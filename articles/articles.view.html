@@ -1,0 +1,14 @@
+<div ng-if="vm.token">
+    <a ng-href="#!/insertArticle">Insert new article</a>
+</div>
+
+<div data-ng-init="init()" >
+    <ul>
+        <li ng-repeat="article in vm.allArticles">
+            <h3>{{article.articleTitle}} </h3>
+
+            <!--<button ng-click="vm.getArticle(article.articleUUID)">View article</button>-->
+            <a ng-href="#!/article/{{article.articleUUID}}">More Info</a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,19 @@
+<div class="col-md-6 col-md-offset-3" ng-if="vm.token">
+    <h2>Insert new article</h2>
+    <form name="form" ng-submit="vm.insertArticle()" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.articleTitle.$dirty && form.articleTitle.$error.required }">
+            <label for="articleTitle">Article Title</label>
+            <input type="text" name="articleTitle" id="articleTitle" class="form-control" ng-model="vm.articleTitle" required />
+            <span ng-show="form.articleTitle.$dirty && form.articleTitle.$error.required" class="help-block">Article Title is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.articleContent.$dirty && form.articleContent.$error.required }">
+            <label for="articleContent">Article Content</label>
+            <textarea data-resizable=true wrap="on" cols="30" rows="5" type="text" name="articleContent" id="articleContent" class="form-control" ng-model="vm.articleContent" required />
+            <span ng-show="form.articleContent.$dirty && form.articleContent.$error.required" class="help-block">Article Content is required</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Insert new Article</button>
+
+        </div>
+    </form>
+</div>

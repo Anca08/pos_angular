@@ -1,0 +1,25 @@
+<h1>{{vm.article.articleTitle}}</h1>
+<p>{{vm.article.articleContent}}</p>
+
+
+<div ng-if="vm.article.comments.length>0">
+    <h5 >Comments</h5>
+    <ul>
+        <li ng-repeat="comment in vm.article.comments">
+            <p>{{comment.username}}</p>
+            <p>{{comment.comment}}</p>
+        </li>
+    </ul>
+</div>
+
+<!-- only logged users can comment-->
+<div ng-if="vm.token">
+    <div class="addComments">
+        <form name="form" ng-submit="vm.addComment()" role="form">
+            <label for="comment">Add Comment</label>
+            <input name="comment" id="comment" type="text" class="form-control" ng-model="vm.commentContent" placeholder="Add comment" autofocus="true"/>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"  >Add Comment</button>
+        </form>
+    </div>
+</div>
+
