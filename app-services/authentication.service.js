@@ -5,8 +5,8 @@
         .module('app')
         .factory('AuthenticationService', AuthenticationService);
 
-    AuthenticationService.$inject = ['$http', '$cookies', '$rootScope', '$timeout', 'UserService'];
-    function AuthenticationService($http, $cookies, $rootScope, $timeout, UserService) {
+    AuthenticationService.$inject = ['$http', '$cookies', '$rootScope', 'UserService'];
+    function AuthenticationService($http, $cookies, $rootScope,  UserService) {
         var service = {};
 
         service.Login = Login;
@@ -33,33 +33,33 @@
             });
         }
 
-        function SetCredentials(token, username, password) {
-            var authdata = Base64.encode(username + ':' + password);
+        function SetCredentials(token, username) {
 
             $rootScope.globals = {
                 currentUser: {
                     username: username,
-                    authdata: authdata
+                    token: token
                 }
             };
-
-            // set default auth header for http requests
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
 
             // store user details in globals cookie that keeps user logged in for 1 week (or until they logout)
             var cookieExp = new Date();
             cookieExp.setDate(cookieExp.getDate() + 7);
             $cookies.putObject('globals', $rootScope.globals, { expires: cookieExp });
-
-            localStorage.setItem('token', token);
+            var loginButtons = document.getElementsByClassName("loginButtons");
+            var logoutButtons = document.getElementById("logoutButtons");
+            $(loginButtons).css('display','none');
+            $(logoutButtons).css('display','block');
         }
 
         function ClearCredentials() {
             $rootScope.globals = {};
             $cookies.remove('globals');
-            $http.defaults.headers.common.Authorization = 'Basic';
 
-            localStorage.removeItem('token');
+            var loginButtons = document.getElementsByClassName("loginButtons");
+            var logoutButtons = document.getElementById("logoutButtons");
+            $(loginButtons).css('display','block');
+            $(logoutButtons).css('display','none');
 
         }
     }

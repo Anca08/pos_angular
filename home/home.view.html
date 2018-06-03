@@ -3,3 +3,15 @@
 
 <p>&nbsp;</p>
 <p><a href="#!/login" ng-click="vm.logout()" class="btn btn-primary">Logout</a></p>
+
+
+
+<div ng-if="vm.isAdmin">
+    <h3>All registered users:</h3>
+    <ul>
+        <li ng-repeat="user in vm.users">
+            {{user.username}}
+            - <a ng-click="vm.deleteUser(user.userUUID)">Delete user</a>
+        </li>
+    </ul>
+</div>

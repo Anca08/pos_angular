@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div class="col-sm-8 col-sm-offset-2">
+    <h2>Edit Article</h2>
+    <form name="form" ng-submit="vm.editArticle()" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.newArticleTitle.$dirty && form.newArticleTitle.$error.required }">
+            <label for="newArticleTitle">Article Title</label>
+            <input type="text" id="newArticleTitle" name="articleTitle"  class="form-control" ng-if="vm.dataLoading"
+                      ng-model="vm.newArticleTitle" required ng-value="vm.articleTitle" />
+            <span ng-show="form.newArticleTitle.$dirty && form.newArticleTitle.$error.required" class="help-block">Article Title is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.newArticleContent.$dirty && form.newArticleContent.$error.required }">
+            <label for="newArticleContent">Article Content</label>
+            <textarea data-resizable=true wrap="on" cols="30" rows="5" type="text" name="newArticleContent" id="newArticleContent"
+                      ng-if="vm.dataLoading"    class="form-control" ng-model="vm.newArticleContent" required ng-value="vm.articleContent"></textarea>
+            <span ng-show="form.newArticleContent.$dirty && form.newArticleContent.$error.required" class="help-block">Article Content is required</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Update Article</button>
+        </div>
+    </form>
+</div>

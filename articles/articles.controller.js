@@ -5,13 +5,12 @@
         .module('app')
         .controller('ArticlesController', ArticlesController);
 
-    ArticlesController.$inject = ['$rootScope', 'ArticlesService'];
-    function ArticlesController($rootScope, ArticlesService){
+    ArticlesController.$inject = ['$rootScope', 'ArticlesService','UserService'];
+    function ArticlesController($rootScope, ArticlesService,UserService){
         var vm =this;
         vm.allArticles= [];
-        vm.token = localStorage.getItem('token');
-
         vm.GetArticles = GetArticles;
+        vm.username = $rootScope.globals.currentUser ? $rootScope.globals.currentUser.username : "";
 
          (function initController() {
              GetArticles();

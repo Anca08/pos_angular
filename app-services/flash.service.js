@@ -5,8 +5,8 @@
         .module('app')
         .factory('FlashService', FlashService);
 
-    FlashService.$inject = ['$rootScope'];
-    function FlashService($rootScope) {
+    FlashService.$inject = ['$rootScope','$timeout'];
+    function FlashService($rootScope,$timeout) {
         var service = {};
 
         service.Success = Success;
@@ -18,7 +18,9 @@
 
         function initService() {
             $rootScope.$on('$locationChangeStart', function () {
-                clearFlashMessage();
+                $timeout(function () {
+                    clearFlashMessage();
+                }, 3000);
             });
 
             function clearFlashMessage() {

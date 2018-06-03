@@ -1,13 +1,14 @@
 <h1>{{vm.article.articleTitle}}</h1>
+<a ng-if="vm.dataLoading" href="#!/edit/{{vm.article.articleUUID}}">Edit Article</a>
+<button ng-if="vm.isAdmin" ng-click="vm.deleteArticle(vm.article.articleUUID)">Delete Article</button>
 <p>{{vm.article.articleContent}}</p>
 
-
-<div ng-if="vm.article.comments.length>0">
+<div ng-if="vm.comments.length>0">
     <h5 >Comments</h5>
     <ul>
-        <li ng-repeat="comment in vm.article.comments">
-            <p>{{comment.username}}</p>
-            <p>{{comment.comment}}</p>
+        <li ng-repeat="comment in vm.comments">
+            <p style="font-size: 16px">{{comment.username}} wrote a comment:</p>
+            <p style="margin-left: 20px;">{{comment.comment}}</p>
         </li>
     </ul>
 </div>
@@ -17,7 +18,9 @@
     <div class="addComments">
         <form name="form" ng-submit="vm.addComment()" role="form">
             <label for="comment">Add Comment</label>
-            <input name="comment" id="comment" type="text" class="form-control" ng-model="vm.commentContent" placeholder="Add comment" autofocus="true"/>
+            <textarea data-resizable=true wrap="on" cols="30" rows="5" name="comment" id="comment" type="text"
+                      class="form-control" ng-model="vm.commentContent"
+                      placeholder="Add comment" autofocus="true" style="margin-bottom: 20px"></textarea>
             <button class="btn btn-lg btn-primary btn-block" type="submit"  >Add Comment</button>
         </form>
     </div>
